@@ -1,0 +1,11 @@
+query appQuery {
+  allPosts {
+    postTitle
+    postContent
+    postTag
+  }
+}
+
+fragment postID on Post {
+  id
+}

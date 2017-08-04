@@ -1,0 +1,22 @@
+﻿type Post implements Node {
+  id: ID! @isUnique
+  postContent: String!
+  postTag: String
+  postTitle: String
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+type Query {
+  allPosts: [Post]
+
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+}
