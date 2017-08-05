@@ -1,16 +1,26 @@
 from graphqlclient import GraphQLClient
+from flask import Flask, abort, request, render_template
+from uuid import uuid4
+import requests
+import requests.auth
+import urllib
+import string
+import random
+import sys
+import os
 import json
+
 client = GraphQLClient('https://api.graph.cool/simple/v1/cj5u5gfmajiig0123trm8ibro')
+app = Flask(__name__)
 
 def get_all_posts():
-    file_object = open('js/__generated__/appQuery.graphql') 
-    file_context = file_object.read()
-    file_object.close()
+    gql_file = open('js/__generated__/appQuery.graphql') 
+    query = file_object.read()
+    gql_file.close()
 
-    result = client.execute(file_context)
-
-    data = json.loads(result)
-    posts = data['data']['allPosts']
+    result = client.execute(query)
+    parsed_result = json.loads(result)
+    posts = parsed_result['data']['allPosts']
     return posts
 
 def create_post(title, content, tag):
@@ -28,22 +38,12 @@ def create_post(title, content, tag):
     print(result)
     
 
-from flask import Flask, abort, request, render_template
-from uuid import uuid4
-import requests
-import requests.auth
-import urllib
-import string
-import random
-import sys
-import os
 
-app = Flask(__name__)
+
 
 # Search bar
 @app.route('/', methods=['GET', 'POST'])
 def homepage():
-    text = '<a href="%s">Test Test</a>'
     return render_template("index.html")
 
 @app.route("/search/", methods=['GET','POST'])
@@ -53,11 +53,11 @@ def search():
     tag = request.form.get('tag')
     if (title and content and tag):
         create_post(title, content, tag)
-    return render_template('users.html', user_list = get_all_posts())
+    return render_template('posts.html', post_list = get_all_posts())
 
 if __name__ == '__main__':
     from werkzeug.serving import run_simple
-    if (sys.argv[1] == '--build'):
+    if (len(sys.argv) == 2 and sys.argv[1] == '--build'):
         os.system('npm run build -- --extensions graphql')
         print('GraphQL Files Compiled\n')
     run_simple('localhost', 9000, app)
