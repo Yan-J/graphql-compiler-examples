@@ -14,8 +14,8 @@ client = GraphQLClient('https://api.graph.cool/simple/v1/cj5u5gfmajiig0123trm8ib
 app = Flask(__name__)
 
 def get_all_posts():
-    gql_file = open('js/__generated__/appQuery.graphql') 
-    query = file_object.read()
+    gql_file = open('src/__generated__/appQuery.graphql') 
+    query = gql_file.read()
     gql_file.close()
 
     result = client.execute(query)
