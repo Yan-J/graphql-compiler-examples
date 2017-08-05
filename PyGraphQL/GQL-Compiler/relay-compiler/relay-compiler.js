@@ -2394,43 +2394,6 @@ module.exports =
 	      var compiledDocumentMap = compiler.compile();
 
 	      var tCompiled = Date.now();
-	      ////
-	      // compiledDocumentMap.forEach(compiledDocument => {
-	      //   console.log(compiledDocument);
-	      // });
-
-	      var _iteratorNormalCompletion = true;
-	      var _didIteratorError = false;
-	      var _iteratorError = undefined;
-
-	      try {
-	        for (var _iterator = compiledDocumentMap[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	          var _step$value = _step.value,
-	              key = _step$value[0],
-	              value = _step$value[1];
-
-	          console.log("\nkey:\n");
-	          console.log(key);
-	          console.log("\nvalue:\n");
-	          //console.log(value);
-	          if (value.text) {
-	            console.log(value.text);
-	          }
-	        }
-	      } catch (err) {
-	        _didIteratorError = true;
-	        _iteratorError = err;
-	      } finally {
-	        try {
-	          if (!_iteratorNormalCompletion && _iterator['return']) {
-	            _iterator['return']();
-	          }
-	        } finally {
-	          if (_didIteratorError) {
-	            throw _iteratorError;
-	          }
-	        }
-	      }
 
 	      var tGenerated = void 0;
 	      try {
