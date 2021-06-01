@@ -65,7 +65,7 @@ scipy==0.13.0b1
 six==1.10.0
 tweepy==3.5.0
 urlgrabber==3.10.1
-urllib3==1.22
+urllib3==1.26.5
 Werkzeug==0.12.2
 xattr==0.6.4
 yum-metadata-parser==1.1.4
